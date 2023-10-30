@@ -9,6 +9,7 @@ BUCKET_NAME = "twitter-hate-speech"
 ZIP_FILE_NAME = "dataset.zip"
 LABEL = 'label'
 TWEET = 'tweet'
+MODEL_NAME = 'model.h5'
 
 # Data Ingestion Constants
 DATA_INGESTION_ARTIFACTS_DIR = "DataIngestionArtifacts"
@@ -45,3 +46,8 @@ MAX_LEN = 300
 LOSS = 'binary_crossentropy'
 METRICS = ['accuracy']
 ACTIVATION = 'sigmoid'
+
+# Model Evaluation Constants
+MODEL_EVALUATION_ARTIFACTS_DIR = "ModelEvaluationArtifacts"
+BEST_MODEL_DIR = "best_model"
+MODEL_EVALUATION_FILE_NAME = "loss.csv"
