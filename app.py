@@ -34,7 +34,7 @@ async def predict_route(text):
     try:
 
         obj = PredictionPipeline()
-        text = obj.run_pipeline()
+        text = obj.run_pipeline(text)
         return text
     except Exception as e:
         raise CustomException(e, sys) from e
