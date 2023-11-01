@@ -21,8 +21,8 @@ jobs:
       - image: google/cloud-sdk
     resource_class: medium
     environment:
-        REPOSITORY: language-identification-docker-repo
-        IMAGE_NAME: language-identification-docker-image
+        REPOSITORY: hate-speech-classifier
+        IMAGE_NAME: hate-speech-classifier
         IMAGE_TAG: latest
         GOOGLE_PROJECT_ID: axial-entropy-403308
         GOOGLE_COMPUTE_ZONE: asia-south1
@@ -53,10 +53,10 @@ jobs:
 
   continuous-deployment:
       machine: true
-      resource_class: deep-learning-01/dl-ineuron
+      resource_class: harshalkumre/self-hosted
       environment:
-        REPOSITORY: language-identification-docker-repo
-        IMAGE_NAME: language-identification-docker-image
+        REPOSITORY: hate-speech-classifier
+        IMAGE_NAME: hate-speech-classifier
         IMAGE_TAG: latest
         GOOGLE_PROJECT_ID: axial-entropy-403308
         GOOGLE_COMPUTE_ZONE: asia-south1
@@ -84,7 +84,7 @@ jobs:
         - run:
             name: Run Image
             command: |-
-              docker run -d -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" -p 80:8080 "$GOOGLE_COMPUTE_ZONE-docker.pkg.dev/$GOOGLE_PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG"
+              docker run -d -p 80:8080 "$GOOGLE_COMPUTE_ZONE-docker.pkg.dev/$GOOGLE_PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG"
         
         - run:
             name: Docker System Prune to Remove Old Images
@@ -109,3 +109,12 @@ workflows:
             - sanity-check
             - continuous-integration
             - continuous-delivery
+
+
+
+
+
+
+
+
+            
