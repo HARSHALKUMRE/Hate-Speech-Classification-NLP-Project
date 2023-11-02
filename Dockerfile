@@ -1,17 +1,13 @@
-FROM google/cloud-sdk:410.0.0
+FROM python:3.10-slim-bullseye
 
-WORKDIR /src/hatespeechClassifier   
-COPY . /src/hatespeechClassifier
+RUN apt update -y && apt install ffmpeg -y
 
-RUN apt update -y && \
-    apt-get update && \
-    pip install --upgrade pip && \
-    apt-get install ffmpeg libsm6 libxext6 -y
+RUN pip3 --no-cache-dir install --upgrade awscli
 
+WORKDIR /app
 
-RUN apt-get install apt-transport-https ca-certificates gnupg -y
-RUN apt install python3 -y
+COPY . /app
 
-RUN pip install -r requirements.txt 
+RUN pip install -r requirements.txt
 
 CMD ["python3", "app.py"]
